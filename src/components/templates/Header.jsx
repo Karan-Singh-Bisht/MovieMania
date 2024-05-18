@@ -13,14 +13,19 @@ function Header({ data }) {
         backgroundPosition: "50% 15%",
         backgroundSize: "cover",
       }}
-      className="w-full h-[50vh] flex flex-col justify-end items-start px-[5%] py-[4%]"
+      className="w-full h-[50%] flex flex-col justify-end items-start px-[5%] py-[4%]"
     >
       <h1 className="w-[70%] text-5xl font-black text-white mb-2">
         {data.name || data.title || data.original_name || data.original_title}
       </h1>
       <p className="w-[70%] text-white mb-2 text-balance">
         {data.overview.slice(0, 200)}...
-        <Link className="text-blue-400">more</Link>
+        <Link
+          to={`/${data.media_type}/details/${data.id}`}
+          className="text-blue-400"
+        >
+          more
+        </Link>
       </p>
       <div className="flex gap-4">
         <p className="text-white flex gap-2 items-center">
@@ -37,7 +42,10 @@ function Header({ data }) {
         )}
       </div>
       {/* //TODO: ADD ROUTE IN LINK */}
-      <Link className="p-3 bg-purple-400 mt-5 rounded-md text-white font-semibold">
+      <Link
+        to={`/${data.media_type}/details/${data.id}`}
+        className="p-3 bg-purple-400 mt-5 rounded-md text-white font-semibold"
+      >
         Watch Trailer
       </Link>
     </div>

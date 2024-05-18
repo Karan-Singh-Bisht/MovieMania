@@ -24,7 +24,7 @@ function TopNav() {
   }, [query]);
 
   return (
-    <div className="w-full max-w-screen-xl ml-[20vw] h-[10vh] relative p-4 flex items-center sticky-top gap-4">
+    <div className="w-full max-w-screen-xl ml-[20vw] h-[5%] relative p-4 flex items-center sticky-top gap-4">
       <IoSearch className="text-3xl ri-search-line hover:cursor-pointer text-white" />
       <input
         value={query}
@@ -36,10 +36,10 @@ function TopNav() {
       {query.length > 0 && (
         <IoIosCloseCircleOutline
           onClick={() => setQuery("")}
-          className="text-3xl hover:cursor-pointer ri-close-circle-line text-white"
+          className="text-3xl hover:cursor-pointer ri-close-circle-line absolute left-[50%] text-white"
         />
       )}
-      <div className="w-[50%] max-h-[50vh] bg-zinc-200 absolute top-[80%] overflow-auto">
+      <div className="w-[50%] max-h-[50vh] z-50 bg-zinc-200 absolute top-[80%] overflow-auto">
         {searches.map(
           (search, id) =>
             search && (
