@@ -32,7 +32,7 @@ function Movie() {
       <div className="w-full flex items-center">
         <IoCaretBackOutline
           onClick={() => navigate(-1)}
-          className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer"
+          className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer hover:opacity-[50%]"
         />
         <h1 className="text-4xl text-[#F0B8DD] font-semibold">Movies</h1>
         <TopNav />
@@ -48,8 +48,3 @@ function Movie() {
 }
 
 export default Movie;
-
-export const movieInfoLoader = async () => {
-  const response = await axios.get(`/movie/${type}`);
-  return response;
-};

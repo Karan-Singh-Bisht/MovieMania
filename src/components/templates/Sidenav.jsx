@@ -23,7 +23,7 @@ function Sidenav() {
     },
     {
       name: "Movies",
-      to: "/movies",
+      to: "/movie",
       icon: <BsCameraReelsFill />,
     },
     {

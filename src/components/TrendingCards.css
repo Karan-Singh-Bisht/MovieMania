@@ -2,10 +2,10 @@
   width: 20vw;
   height: 20vw;
   position: relative;
-  opacity: 0.7;
   border-radius: 1vw;
   background-size: cover;
   background-position: center;
+  opacity: 0.8;
 }
 
 .trending-card:hover {

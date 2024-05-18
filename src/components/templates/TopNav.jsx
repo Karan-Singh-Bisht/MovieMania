@@ -44,7 +44,7 @@ function TopNav() {
           (search, id) =>
             search && (
               <Link
-                // to="/home"
+                to={`/${search.media_type}/details/${search.id}`}
                 key={id}
                 className="hover:text-black hover:bg-zinc-300 duration-300 font-semibold text-zinc-600 w-[100%] p-10 flex justify-start items-center border-b-2 gap-3 border-zinc-100"
               >

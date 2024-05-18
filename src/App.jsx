@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Trending from "./components/Trending";
 import Popular from "./components/Popular";
-import Movie, { movieInfoLoader } from "./components/Movie";
+import Movie from "./components/Movie";
 import TVShow from "./components/TVShow";
 import People from "./components/People";
 import MovieDetails from "./components/MovieDetails";
@@ -20,8 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/popular" element={<Popular />} />
-          <Route path="/movies" element={<Movie />} /> //Learn how to use
-          loader.
+          <Route path="/movie" element={<Movie />} /> //Learn how to use loader.
           <Route path="/movie/details/:id" element={<MovieDetails />} />
           <Route path="/tv-shows" element={<TVShow />} />
           <Route path="/tv/details/:id" element={<TVdetails />} />
