@@ -10,3 +10,7 @@ export const store = configureStore({
     tv: tvReducer,
   },
 });
+
+// 1 Store
+// 2 reducers
+// 3 actions

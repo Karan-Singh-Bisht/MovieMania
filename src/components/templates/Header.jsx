@@ -44,7 +44,7 @@ function Header({ data }) {
       {/* //TODO: ADD ROUTE IN LINK */}
       <Link
         to={`/${data.media_type}/details/${data.id}`}
-        className="p-3 bg-purple-400 mt-5 rounded-md text-white font-semibold"
+        className="p-3 bg-purple-400 hover:opacity-[0.8] mt-5 rounded-md text-white font-semibold"
       >
         Watch Trailer
       </Link>

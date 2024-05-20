@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncloadMovie } from "../store/actions/movieActions";
+import { asyncloadTv } from "../store/actions/tvActions";
 import { Outlet, useLocation, useParams } from "react-router-dom";
-import { removeMovie } from "../store/actions/movieActions";
+import { removeTv } from "../store/actions/tvActions";
 import { IoCaretBackOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { SiWikipedia } from "react-icons/si";
@@ -14,27 +14,21 @@ import { FaCalendarAlt } from "react-icons/fa";
 import NoImage from "/NoImage.webp";
 import "./TrendingCards.css"; // Import CSS file for component styling
 
-function MovieDetails() {
+function TvDetails() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { info } = useSelector((state) => state.movie);
+  const { info } = useSelector((state) => state.tv);
   console.log(info);
 
   useEffect(() => {
-    dispatch(asyncloadMovie(id)); //dispatch = call
+    dispatch(asyncloadTv(id)); //dispatch = call
     return () => {
-      dispatch(removeMovie());
+      dispatch(removeTv());
     };
   }, [id]);
-
-  const convertMinutesToHours = (num) => {
-    let hours = Math.floor(num / 60);
-    let minutes = num % 60;
-    return `${hours}h ${minutes}m`;
-  };
 
   return info ? (
     <div
@@ -48,7 +42,7 @@ function MovieDetails() {
       {/* Part 1 navigation */}
       <nav className="w-full flex items-center">
         <IoCaretBackOutline
-          onClick={() => navigate("/movie")}
+          onClick={() => navigate("/tv")}
           className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer hover:opacity-[50%]"
         />
         <div className="text-3xl text-gray-400 flex gap-5 w-[15vw] h-[5vw] items-center justify-center">
@@ -88,9 +82,9 @@ function MovieDetails() {
           />
           <div className="w-full flex flex-col gap-1">
             <h1 className="text-6xl font-black text-white">
-              {info[0].detail.title || original_title}
+              {info[0].detail.name || original_name}
               <small className="text-5xl font-semibold ml-1 text-gray-200">
-                ({info[0].detail.release_date.slice(0, 4)})
+                ({info[0].detail.first_air_date.slice(0, 4)})
               </small>
             </h1>
             <div className="flex items-center gap-1 text-gray-400">
@@ -103,9 +97,11 @@ function MovieDetails() {
                 </p>
               ))}
               <div className="w-[0.3vw] h-[0.3vw] mx-1 rounded-full bg-white"></div>
-              <p className="normal-case">
-                {convertMinutesToHours(info[0].detail.runtime)}
-              </p>
+              {info[0].detail.episode_run_time[0] && (
+                <p className="normal-case">
+                  {info[0].detail.episode_run_time[0] + " min/episode"}
+                </p>
+              )}
             </div>
             <div className="flex items-center gap-3 text-[1vw] my-2">
               <div className="w-[4vw] h-[4vw] flex items-center text-black text-[1.5vw] font-black justify-center rounded-full bg-yellow-300">
@@ -199,15 +195,16 @@ function MovieDetails() {
         </div>
       </div>
 
-      {/* part 4 Recommendation */}
-      <div className="mt-[1vw]">
-        <h1 className="my-3 font-black text-4xl">Recommendations</h1>
-        <div className="h-[21vw] flex overflow-x-auto gap-5">
-          {info[0].recommendation.length > 0
-            ? info[0].recommendation.map((item, index) => (
+      {/*part 4 Seasons  */}
+      {info[0].detail.seasons.length > 0 && (
+        <div className="my-[2vw] w-full p-3">
+          <h1 className="my-3 font-black text-4xl">Seasons</h1>
+          <div className="h-[21vw] flex overflow-x-auto gap-5">
+            {info[0].detail.seasons.length > 0 &&
+              info[0].detail.seasons.map((item, index) => (
                 <Link
                   key={index}
-                  to={`/${item.media_type}/details/${item.id}`} // Example: Link to details page
+                  to={`/tv/details/${item.id}`} // Example: Link to details page
                   className="trending-card"
                   style={{
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(https://image.tmdb.org/t/p/original/${
@@ -216,57 +213,97 @@ function MovieDetails() {
                   }}
                 >
                   <div className="trending-card-content">
-                    <h2 className="trending-card-title">
-                      {item.name || item.original_title}
+                    <h2 className="trending-card-title text-3xl">
+                      {item.name || item.original_name}
                     </h2>
                     <div className="trending-card-info">
-                      <p className="media-type">{item.media_type}</p>
-                      <p className="rating">
-                        {item.adult ? <NoImage /> : "PG"}
+                      <p className="normal-case">
+                        Episodes : {item.episode_count}
                       </p>
                     </div>
-                    <p className="release-date">
+                    <p className="release-date flex items-center text-[0.8vw]">
                       <FaCalendarAlt />
-                      {item.release_date || item.first_air_date}
-                    </p>
-                  </div>
-                </Link>
-              ))
-            : info[0].similar.map((item, index) => (
-                <Link
-                  key={index}
-                  to={`/${item.media_type}/details/${item.id}`} // Example: Link to details page
-                  className="trending-card"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(https://image.tmdb.org/t/p/original/${
-                      item.backdrop_path || item.poster_path
-                    })`,
-                  }}
-                >
-                  <div className="trending-card-content">
-                    <h2 className="trending-card-title">
-                      {item.name || item.original_title}
-                    </h2>
-                    <div className="trending-card-info">
-                      <p className="media-type">{item.media_type}</p>
-                      <p className="rating">
-                        {item.adult ? <NoImage /> : "PG"}
-                      </p>
-                    </div>
-                    <p className="release-date">
-                      <FaCalendarAlt />
-                      {item.release_date || item.first_air_date}
+                      {item.release_date || item.air_date}
                     </p>
                   </div>
                 </Link>
               ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* part 5 Recommendation */}
+      {(info[0].recommendation || similar).length > 0 && (
+        <div className="p-3">
+          <h1 className="my-3 font-black text-4xl">Recommendations</h1>
+          <div className="h-[21vw] flex overflow-x-auto gap-5">
+            {info[0].recommendation.length > 0
+              ? info[0].recommendation.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={`/${item.media_type}/details/${item.id}`} // Example: Link to details page
+                    className="trending-card"
+                    style={{
+                      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(https://image.tmdb.org/t/p/original/${
+                        item.backdrop_path || item.poster_path
+                      })`,
+                    }}
+                  >
+                    <div className="trending-card-content">
+                      <h2 className="trending-card-title">
+                        {item.name || item.original_title}
+                      </h2>
+                      <div className="trending-card-info">
+                        <p className="media-type">{item.media_type}</p>
+                        <p className="rating">
+                          {item.adult ? <NoImage /> : "PG"}
+                        </p>
+                      </div>
+                      <p className="release-date">
+                        <FaCalendarAlt />
+                        {item.release_date || item.first_air_date}
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              : info[0].similar.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={`/${item.media_type}/details/${item.id}`} // Example: Link to details page
+                    className="trending-card"
+                    style={{
+                      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(https://image.tmdb.org/t/p/original/${
+                        item.backdrop_path || item.poster_path
+                      })`,
+                    }}
+                  >
+                    <div className="trending-card-content">
+                      <h2 className="trending-card-title">
+                        {item.name || item.original_title}
+                      </h2>
+                      <div className="trending-card-info">
+                        <p className="media-type">{item.media_type}</p>
+                        <p className="rating">
+                          {item.adult ? <NoImage /> : "PG"}
+                        </p>
+                      </div>
+                      <p className="release-date">
+                        <FaCalendarAlt />
+                        {item.release_date || item.first_air_date}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+          </div>
+        </div>
+      )}
+
       <Outlet />
+      {/* //trailer */}
     </div>
   ) : (
     <Loader />
   );
 }
 
-export default MovieDetails;
+export default TvDetails;

@@ -11,7 +11,7 @@ import Cards from "./templates/Cards";
 function Movie() {
   document.title = "Movie Magic | Movie";
   const navigate = useNavigate();
-  const [type, setType] = useState("top_rated");
+  const [type, setType] = useState("popular");
   const [movie, setMovie] = useState([]);
 
   const movieCards = async () => {
@@ -31,7 +31,7 @@ function Movie() {
     <div className="w-full h-screen p-10 relative">
       <div className="w-full flex items-center">
         <IoCaretBackOutline
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer hover:opacity-[50%]"
         />
         <h1 className="text-4xl text-[#F0B8DD] font-semibold">Movies</h1>

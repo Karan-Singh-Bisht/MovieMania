@@ -31,7 +31,7 @@ function TVShow() {
     <div className="w-full h-screen p-10 relative">
       <div className="w-full flex items-center">
         <IoCaretBackOutline
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer"
         />
         <h1 className="text-4xl text-[#F0B8DD] font-semibold">TV</h1>

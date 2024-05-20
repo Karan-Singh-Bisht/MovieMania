@@ -10,18 +10,21 @@ export const asyncloadMovie = (id) => async (dispatch, getState) => {
     const similar = await axios.get(`/movie/${id}/similar`);
     const videos = await axios.get(`/movie/${id}/videos`);
     const watchProvider = await axios.get(`/movie/${id}/watch/providers`);
-    let combineData = {
-      detail: details.data,
-      externalId: externalId.data,
-      recommendation: recommendation.data.results,
-      similar: similar.data.results,
-      videos: videos.data.results.find((m) => m.type === "Trailer"),
-      watchProvider: watchProvider.data.results.IN,
-    };
+    let combineData = [
+      {
+        detail: details.data,
+        externalId: externalId.data,
+        recommendation: recommendation.data.results,
+        similar: similar.data.results,
+        videos: videos.data.results.find((m) => m.type === "Trailer"),
+        watchProvider: watchProvider.data.results.IN,
+      },
+    ];
 
     dispatch(loadMovie(combineData));
-    console.log(combineData);
   } catch (err) {
     console.log("Error in movieActions", err);
   }
 };
+
+//Movie Details in components contains part of actions.

@@ -7,8 +7,10 @@ import Movie from "./components/Movie";
 import TVShow from "./components/TVShow";
 import People from "./components/People";
 import MovieDetails from "./components/MovieDetails";
-import TVdetails from "./components/TVdetails";
+import TVDetails from "./components/TVDetails";
 import Peopledetails from "./components/Peopledetails";
+import Trailer from "./components/templates/Trailer";
+import NotFound from "./components/templates/NotFound";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,11 +23,16 @@ function App() {
           <Route path="/trending" element={<Trending />} />
           <Route path="/popular" element={<Popular />} />
           <Route path="/movie" element={<Movie />} /> //Learn how to use loader.
-          <Route path="/movie/details/:id" element={<MovieDetails />} />
-          <Route path="/tv-shows" element={<TVShow />} />
-          <Route path="/tv/details/:id" element={<TVdetails />} />
+          <Route path="/movie/details/:id" element={<MovieDetails />}>
+            <Route path="/movie/details/:id/trailer" element={<Trailer />} />
+          </Route>
+          <Route path="/tv" element={<TVShow />} />
+          <Route path="/tv/details/:id" element={<TVDetails />}>
+            <Route path="/tv/details/:id/trailer" element={<Trailer />} />
+          </Route>
           <Route path="/people" element={<People />} />
           <Route path="/people/details/:id" element={<Peopledetails />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>

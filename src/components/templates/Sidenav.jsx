@@ -28,7 +28,7 @@ function Sidenav() {
     },
     {
       name: "TV Shows",
-      to: "/tv-shows",
+      to: "/tv",
       icon: <PiTelevisionFill />,
     },
     {
