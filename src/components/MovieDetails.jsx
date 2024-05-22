@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
 import NoImage from "/NoImage.webp";
 import "./TrendingCards.css"; // Import CSS file for component styling
+import { PiTelevisionSimpleFill } from "react-icons/pi";
 
 function MovieDetails() {
   const { pathname } = useLocation();
@@ -21,7 +22,6 @@ function MovieDetails() {
 
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.movie);
-  console.log(info);
 
   useEffect(() => {
     dispatch(asyncloadMovie(id)); //dispatch = call
@@ -48,10 +48,14 @@ function MovieDetails() {
       {/* Part 1 navigation */}
       <nav className="w-full flex items-center">
         <IoCaretBackOutline
-          onClick={() => navigate("/movie")}
-          className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer hover:opacity-[50%]"
+          onClick={() => navigate(-1)}
+          className="text-[#F0B8DD] text-5xl mr-10 hover:cursor-pointer hover:opacity-[50%]"
         />
-        <div className="text-3xl text-gray-400 flex gap-5 w-[15vw] h-[5vw] items-center justify-center">
+        <PiTelevisionSimpleFill
+          onClick={() => navigate("/")}
+          className="text-[#F0B8DD] text-5xl mr-10 hover:cursor-pointer hover:opacity-[50%]"
+        />
+        <div className="text-3xl text-gray-400 flex gap-5 w-[15vw] h-[5vw] items-center justify-start">
           {info[0].externalId.wikidata_id && (
             <a
               className="hover:text-white"
@@ -146,7 +150,7 @@ function MovieDetails() {
 
       {/* Part-3 Buy or Rent */}
 
-      <div className="w-full h-[17vw]">
+      <div className="w-full h-[17vw] p-5">
         <div className="flex flex-col ">
           {info[0].watchProvider && info[0].watchProvider.flatrate && (
             <h1 className="font-bold text-2xl text-gray-200 mb-1">Watch On</h1>

@@ -18,7 +18,7 @@ function Header({ data }) {
       <h1 className="w-[70%] text-5xl font-black text-white mb-2">
         {data.name || data.title || data.original_name || data.original_title}
       </h1>
-      <p className="w-[70%] text-white mb-2 text-balance">
+      <p className="w-[70%] normal-case text-white mb-2 text-balance">
         {data.overview.slice(0, 200)}...
         <Link
           to={`/${data.media_type}/details/${data.id}`}
@@ -43,7 +43,7 @@ function Header({ data }) {
       </div>
       {/* //TODO: ADD ROUTE IN LINK */}
       <Link
-        to={`/${data.media_type}/details/${data.id}`}
+        to={`/${data.media_type}/details/${data.id}/trailer`}
         className="p-3 bg-purple-400 hover:opacity-[0.8] mt-5 rounded-md text-white font-semibold"
       >
         Watch Trailer

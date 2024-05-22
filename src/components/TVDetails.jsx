@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
 import NoImage from "/NoImage.webp";
 import "./TrendingCards.css"; // Import CSS file for component styling
+import { PiTelevisionSimpleFill } from "react-icons/pi";
 
 function TvDetails() {
   const { pathname } = useLocation();
@@ -21,7 +22,6 @@ function TvDetails() {
 
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.tv);
-  console.log(info);
 
   useEffect(() => {
     dispatch(asyncloadTv(id)); //dispatch = call
@@ -42,10 +42,14 @@ function TvDetails() {
       {/* Part 1 navigation */}
       <nav className="w-full flex items-center">
         <IoCaretBackOutline
-          onClick={() => navigate("/tv")}
-          className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer hover:opacity-[50%]"
+          onClick={() => navigate(-1)}
+          className="text-[#F0B8DD] text-5xl mr-10 hover:cursor-pointer hover:opacity-[50%]"
         />
-        <div className="text-3xl text-gray-400 flex gap-5 w-[15vw] h-[5vw] items-center justify-center">
+        <PiTelevisionSimpleFill
+          onClick={() => navigate("/")}
+          className="text-[#F0B8DD] text-5xl mr-10 hover:cursor-pointer hover:opacity-[50%]"
+        />
+        <div className="text-3xl text-gray-400 flex gap-5 w-[15vw] h-[5vw] items-center justify-start">
           {info[0].externalId.wikidata_id && (
             <a
               className="hover:text-white"
@@ -111,9 +115,20 @@ function TvDetails() {
                 User <br /> Score
               </h2>
             </div>
-            <h1 className="text-gray-200 text-[1vw] tracking-wide">
-              {info[0].detail.tagline}
-            </h1>
+            <div className="flex flex-col">
+              <h1 className="text-gray-200 text-[1vw] tracking-wide">
+                Number of Seasons :{" "}
+                <span className="font-black">
+                  {info[0].detail.number_of_seasons}
+                </span>
+              </h1>
+              <h1 className="text-gray-200 text-[1vw] tracking-wide">
+                Number of Episodes :{" "}
+                <span className="font-black">
+                  {info[0].detail.number_of_episodes}
+                </span>
+              </h1>
+            </div>
             <div className="w-[68%]">
               <h1 className="text-2xl font-black mb-2">Overview</h1>
               <p className="normal-case">{info[0].detail.overview}</p>
@@ -142,7 +157,7 @@ function TvDetails() {
 
       {/* Part-3 Buy or Rent */}
 
-      <div className="w-full h-[17vw]">
+      <div className="w-full h-[17vw] p-5">
         <div className="flex flex-col ">
           {info[0].watchProvider && info[0].watchProvider.flatrate && (
             <h1 className="font-bold text-2xl text-gray-200 mb-1">Watch On</h1>

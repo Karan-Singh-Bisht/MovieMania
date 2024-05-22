@@ -32,8 +32,8 @@ function Sidenav() {
       icon: <PiTelevisionFill />,
     },
     {
-      name: "People",
-      to: "/people",
+      name: "Person",
+      to: "/person",
       icon: <BsPeopleFill />,
     },
   ];

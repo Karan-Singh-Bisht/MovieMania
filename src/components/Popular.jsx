@@ -36,11 +36,13 @@ function Popular() {
         />
         <h1 className="text-4xl text-[#F0B8DD] font-semibold">Popular</h1>
         <TopNav />
-        <Dropdown
-          title="Category"
-          options={["tv", "movie"]}
-          func={(e) => setCategory(e.target.value)}
-        />
+        <div className="absolute left-[17vw]">
+          <Dropdown
+            title="Category"
+            options={["tv", "movie"]}
+            func={(e) => setCategory(e.target.value)}
+          />
+        </div>
       </div>
       <div className="absolute left-[10.5vw] my-2">
         <h1 className="text-4xl text-[#F0B8DD] capitalize">{`${category}`}</h1>

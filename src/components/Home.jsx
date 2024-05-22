@@ -41,12 +41,12 @@ function Home() {
 
   return wallpaper && cards ? (
     <>
-      <div className="w-full h-screen flex">
+      <div className="w-full h-screen flex overflow-hidden">
         <Sidenav />
         <div className="w-[80%] h-screen p-2">
           <TopNav />
           <Header data={wallpaper} />
-          <div className="flex justify-between px-10 pt-5 items-center">
+          <div className="flex justify-between px-10 pt-4 items-center">
             <h1 className="text-4xl mb-4 text-gray-400 font-black">Trending</h1>
             <Dropdown
               title="Category"

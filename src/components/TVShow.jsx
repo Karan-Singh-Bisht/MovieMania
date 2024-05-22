@@ -36,11 +36,13 @@ function TVShow() {
         />
         <h1 className="text-4xl text-[#F0B8DD] font-semibold">TV</h1>
         <TopNav />
-        <Dropdown
-          title="Type"
-          options={["popular", "top_rated", "on_the_air", "airing_today"]}
-          func={(e) => setType(e.target.value)}
-        />
+        <div className="absolute left-[13.5vw]">
+          <Dropdown
+            title="Type"
+            options={["popular", "top_rated", "on_the_air", "airing_today"]}
+            func={(e) => setType(e.target.value)}
+          />
+        </div>
       </div>
       <Cards data={tv} title="tv" />
     </div>

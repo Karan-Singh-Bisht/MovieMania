@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
 import NoImage from "/NoImage.webp";
 
@@ -10,15 +10,19 @@ function Cards({ data, title }) {
         <Link
           to={`/${item.media_type || title}/details/${item.id}`}
           key={id}
-          className="shadow-inner hover:bg-[#2B2B3C] hover:cursor-pointer relative w-[15vw] h-[20vw] flex flex-col p-2 rounded-md"
+          className="shadow-inner hover:bg-[#2B2B3C] hover:cursor-pointer relative w-[16vw] h-[20vw] flex flex-col p-2 rounded-md"
         >
-          <img
-            className="h-[60%] rounded-t-md"
-            src={`https://image.tmdb.org/t/p/original/${
-              item.backdrop_path || item.poster_path
-            }`}
-            alt="image"
-          />
+          {item.backdrop_path || item.poster_path ? (
+            <img
+              className="h-[60%] rounded-t-md"
+              src={`https://image.tmdb.org/t/p/original/${
+                item.backdrop_path || item.poster_path
+              }`}
+              alt="image"
+            />
+          ) : (
+            <img className="h-[60%] rounded-t-md" src={NoImage} />
+          )}
           <div className="px-1 h-[40%] py-2 flex flex-col gap-4">
             <div className="h-[50%]">
               <h1 className="text-white text-md font-semibold">

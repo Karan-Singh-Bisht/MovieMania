@@ -25,8 +25,12 @@ function TopNav() {
 
   return (
     <div className="w-full max-w-screen-xl ml-[20vw] h-[5%] relative p-4 flex items-center sticky-top gap-4">
-      <IoSearch className="text-3xl ri-search-line hover:cursor-pointer text-white" />
+      <label htmlFor="search">
+        <IoSearch className="text-3xl ri-search-line hover:cursor-pointer text-white" />
+      </label>
       <input
+        id="search"
+        name="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         type="text"

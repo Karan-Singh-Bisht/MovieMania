@@ -34,13 +34,17 @@ function Movie() {
           onClick={() => navigate("/")}
           className="text-[#F0B8DD] text-5xl mr-2 hover:cursor-pointer hover:opacity-[50%]"
         />
+
         <h1 className="text-4xl text-[#F0B8DD] font-semibold">Movies</h1>
+
         <TopNav />
-        <Dropdown
-          title="Type"
-          options={["popular", "top_rated", "upcoming"]}
-          func={(e) => setType(e.target.value)}
-        />
+        <div className="absolute left-[16vw]">
+          <Dropdown
+            title="Type"
+            options={["popular", "top_rated", "upcoming"]}
+            func={(e) => setType(e.target.value)}
+          />
+        </div>
       </div>
       <Cards data={movie} title="movie" />
     </div>
