@@ -7,27 +7,45 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../utils/axios";
 import Cards from "./templates/Cards";
+import Loader from "./Loader";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Popular() {
   document.title = "Movie Magic | Popular Page";
   const navigate = useNavigate();
   const [category, setCategory] = useState("tv");
   const [popular, setPopular] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const popularCards = async () => {
     try {
-      const { data } = await axios.get(`/${category}/popular`);
-      setPopular(data.results);
+      const { data } = await axios.get(`/${category}/popular?page=${page}`);
+      if (data.results.length > 0) {
+        setPopular((prevState) => [...prevState, ...data.results]);
+        setPage((prevState) => prevState + 1);
+      } else {
+        setHasMore(false);
+      }
     } catch (err) {
       console.log("Error in Trending :: ERR", err);
     }
   };
 
+  const refreshHandler = () => {
+    if (popular.length === 0) {
+      popularCards();
+    } else {
+      setPage(1);
+      setPopular([]);
+    }
+  };
+
   useEffect(() => {
-    popularCards();
+    refreshHandler();
   }, [category]);
 
-  return (
+  return popular.length > 0 ? (
     <div className="w-full h-screen p-10 relative">
       <div className="w-full flex items-center">
         <IoCaretBackOutline
@@ -47,8 +65,17 @@ function Popular() {
       <div className="absolute left-[10.5vw] my-2">
         <h1 className="text-4xl text-[#F0B8DD] capitalize">{`${category}`}</h1>
       </div>
-      <Cards data={popular} title={category} />
+      <InfiniteScroll
+        dataLength={popular.length}
+        next={popularCards()}
+        hasMore={hasMore}
+        loader={<h1>Loading</h1>}
+      >
+        <Cards data={popular} title={category} />
+      </InfiniteScroll>
     </div>
+  ) : (
+    <Loader />
   );
 }
 

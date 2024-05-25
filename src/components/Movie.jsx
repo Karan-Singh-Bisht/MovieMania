@@ -7,24 +7,41 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../utils/axios";
 import Cards from "./templates/Cards";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Movie() {
   document.title = "Movie Magic | Movie";
   const navigate = useNavigate();
   const [type, setType] = useState("popular");
   const [movie, setMovie] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
 
   const movieCards = async () => {
     try {
-      const { data } = await axios.get(`/movie/${type}`);
-      setMovie(data.results);
+      const { data } = await axios.get(`/movie/${type}?page=${page}`);
+      if (data.results.length > 0) {
+        setMovie((prevState) => [...prevState, ...data.results]);
+        setPage((prevState) => prevState + 1);
+      } else {
+        setHasMore(false);
+      }
     } catch (err) {
       console.log("Error in Trending :: ERR", err);
     }
   };
 
+  const refreshHandler = () => {
+    if (movie.length === 0) {
+      movieCards();
+    } else {
+      setPage(1);
+      setMovie([]);
+    }
+  };
+
   useEffect(() => {
-    movieCards();
+    refreshHandler();
   }, [type]);
 
   return (
@@ -46,7 +63,14 @@ function Movie() {
           />
         </div>
       </div>
-      <Cards data={movie} title="movie" />
+      <InfiniteScroll
+        dataLength={movie.length}
+        loader={<h1>Loading...</h1>}
+        hasMore={hasMore}
+        next={movieCards()}
+      >
+        <Cards data={movie} title="movie" />
+      </InfiniteScroll>
     </div>
   );
 }

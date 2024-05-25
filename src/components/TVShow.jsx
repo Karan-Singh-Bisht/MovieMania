@@ -7,24 +7,41 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../utils/axios";
 import Cards from "./templates/Cards";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function TVShow() {
   document.title = "Movie Magic | TV_SHOWS";
   const navigate = useNavigate();
   const [type, setType] = useState("top_rated");
   const [tv, setTV] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const tvCards = async () => {
     try {
-      const { data } = await axios.get(`/tv/${type}`);
-      setTV(data.results);
+      const { data } = await axios.get(`/tv/${type}?page=${page}`);
+      if (data.results.length > 0) {
+        setTV((prevState) => [...prevState, ...data.results]);
+        setPage((prevState) => prevState + 1);
+      } else {
+        setHasMore(false);
+      }
     } catch (err) {
       console.log("Error in Trending :: ERR", err);
     }
   };
 
+  const refreshHandler = () => {
+    if (tv.length === 0) {
+      tvCards();
+    } else {
+      setPage(1);
+      setTV([]);
+    }
+  };
+
   useEffect(() => {
-    tvCards();
+    refreshHandler();
   }, [type]);
 
   return (
@@ -44,7 +61,14 @@ function TVShow() {
           />
         </div>
       </div>
-      <Cards data={tv} title="tv" />
+      <InfiniteScroll
+        dataLength={tv.length}
+        loader={<h1>Loading...</h1>}
+        hasMore={hasMore}
+        next={tvCards()}
+      >
+        <Cards data={tv} title="tv" />
+      </InfiniteScroll>
     </div>
   );
 }

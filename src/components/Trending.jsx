@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../utils/axios";
 import Cards from "./templates/Cards";
+import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Trending() {
@@ -15,21 +16,39 @@ function Trending() {
   const [category, setCategory] = useState("all");
   const [duration, setDuration] = useState("day");
   const [trending, setTrending] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const trendCards = async () => {
     try {
-      const { data } = await axios.get(`/trending/${category}/${duration}`);
-      setTrending(data.results);
+      const { data } = await axios.get(
+        `/trending/${category}/${duration}?page=${page}`
+      );
+      if (data.results.length > 0) {
+        setTrending((prevState) => [...prevState, ...data.results]);
+        setPage((prevState) => prevState + 1);
+      } else {
+        setHasMore(false);
+      }
     } catch (err) {
       console.log("Error in Trending :: ERR", err);
     }
   };
 
+  const refreshHandler = () => {
+    if (trending.length === 0) {
+      trendCards();
+    } else {
+      setPage(1);
+      setTrending([]);
+    }
+  };
+
   useEffect(() => {
-    trendCards();
+    refreshHandler();
   }, [category, duration]);
 
-  return (
+  return trending.length > 0 ? (
     <div className="w-full h-screen p-10">
       <div className="w-full flex items-center">
         <IoCaretBackOutline
@@ -50,9 +69,17 @@ function Trending() {
           func={(e) => setDuration(e.target.value)}
         />
       </div>
-
-      <Cards data={trending} title={category} />
+      <InfiniteScroll
+        dataLength={trending.length}
+        next={trendCards()}
+        hasMore={hasMore}
+        loader={<h1>Loading</h1>}
+      >
+        <Cards data={trending} title={category} />
+      </InfiniteScroll>
     </div>
+  ) : (
+    <Loader />
   );
 }
 

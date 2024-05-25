@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
 import NoImage from "/NoImage.webp";
+import Loader from "../Loader";
 
 function Cards({ data, title }) {
-  return (
+  return data ? (
     <div className="mt-4 w-full p-10 flex gap-5 flex-wrap justify-center">
       {data.map((item, id) => (
         <Link
@@ -30,12 +31,14 @@ function Cards({ data, title }) {
               </h1>
             </div>
             <div className="h-[25%]">
-              <p className="w-full text-white normal-case text-xs">
-                {item.overview.slice(0, 100)}
-                {item.overview.length > 0 && (
-                  <span className="text-blue-400">...more</span>
-                )}
-              </p>
+              {item.overview && (
+                <p className="w-full text-white normal-case text-xs">
+                  {item.overview.slice(0, 100)}
+                  {item.overview.length > 0 && (
+                    <span className="text-blue-400">...more</span>
+                  )}
+                </p>
+              )}
             </div>
             <div className="flex gap-4 my-4 items-center h-[25%]">
               <p className="text-white flex gap-2 text-sm items-center">
@@ -58,6 +61,8 @@ function Cards({ data, title }) {
         </Link>
       ))}
     </div>
+  ) : (
+    <Loader />
   );
 }
 

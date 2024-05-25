@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaCalendarAlt } from "react-icons/fa";
-import NoImage from "/NoImage.webp";
+import NoImage from "/icons8-18-plus-48.png";
 
 function Header({ data }) {
   return (
@@ -41,13 +41,20 @@ function Header({ data }) {
           <p className="text-white">PG</p>
         )}
       </div>
-      {/* //TODO: ADD ROUTE IN LINK */}
-      <Link
-        to={`/${data.media_type}/details/${data.id}/trailer`}
-        className="p-3 bg-purple-400 hover:opacity-[0.8] mt-5 rounded-md text-white font-semibold"
-      >
-        Watch Trailer
-      </Link>
+      <div className="flex gap-4">
+        <Link
+          to={`/${data.media_type}/details/${data.id}/trailer`}
+          className="p-3 bg-purple-400 hover:opacity-[0.8] mt-5 rounded-md text-white font-semibold"
+        >
+          Watch Trailer
+        </Link>
+        <Link
+          to={`/${data.media_type}/details/${data.id}`}
+          className="p-3 bg-gray-400 hover:opacity-[0.8] mt-5 rounded-md text-white font-semibold"
+        >
+          Details
+        </Link>
+      </div>
     </div>
   );
 }
