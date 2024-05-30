@@ -11,10 +11,10 @@ import TVDetails from "./components/TVDetails";
 import Peopledetails from "./components/Peopledetails";
 import Trailer from "./components/templates/Trailer";
 import NotFound from "./components/templates/NotFound";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <div className="w-screen h-[100%] overflow-x-hidden bg-[#201F31] overflow-y-auto">
@@ -32,6 +32,8 @@ function App() {
           </Route>
           <Route path="/person" element={<People />} />
           <Route path="/person/details/:id" element={<Peopledetails />} />
+          <Route path="/about-us" element={<AboutUs />}></Route>
+          <Route path="/contact-us" element={<ContactUs />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
