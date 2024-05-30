@@ -11,7 +11,7 @@ import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Popular() {
-  document.title = "Movie Magic | Popular Page";
+  document.title = "Movie Mania| Popular Page";
   const navigate = useNavigate();
   const [category, setCategory] = useState("tv");
   const [popular, setPopular] = useState([]);

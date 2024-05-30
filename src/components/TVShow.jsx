@@ -10,7 +10,7 @@ import Cards from "./templates/Cards";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function TVShow() {
-  document.title = "Movie Magic | TV_SHOWS";
+  document.title = "Movie Mania | TV_SHOWS";
   const navigate = useNavigate();
   const [type, setType] = useState("top_rated");
   const [tv, setTV] = useState([]);

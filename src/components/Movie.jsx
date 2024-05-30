@@ -10,7 +10,7 @@ import Cards from "./templates/Cards";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Movie() {
-  document.title = "Movie Magic | Movie";
+  document.title = "Movie Mania | Movie";
   const navigate = useNavigate();
   const [type, setType] = useState("popular");
   const [movie, setMovie] = useState([]);

@@ -8,7 +8,7 @@ import TrendingCards from "./TrendingCards";
 import Dropdown from "./templates/Dropdown";
 
 function Home() {
-  document.title = "Movie Magic | Home Page";
+  document.title = "Movie Mania | Home Page";
 
   const [wallpaper, setWallpaper] = useState(null);
   const [cards, setCards] = useState(null);

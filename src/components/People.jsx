@@ -9,7 +9,7 @@ import PeopleCards from "../components/PeopleCards";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function People() {
-  document.title = "Movie Magic | People";
+  document.title = "Movie Mania | People";
   const navigate = useNavigate();
   const [people, setPeople] = useState([]);
   const [page, setPage] = useState(1);

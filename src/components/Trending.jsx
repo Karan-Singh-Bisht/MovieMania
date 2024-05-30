@@ -11,7 +11,7 @@ import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Trending() {
-  document.title = "Movie Magic | Trending Page";
+  document.title = "Movie Mania | Trending Page";
   const navigate = useNavigate();
   const [category, setCategory] = useState("all");
   const [duration, setDuration] = useState("day");
