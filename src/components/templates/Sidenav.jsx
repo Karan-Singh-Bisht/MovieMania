@@ -55,7 +55,7 @@ function Sidenav() {
     <div className="w-[20%] h-screen border-r-2 border-zinc-400 py-10 px-5">
       <h1 className="font-bold text-white text-3xl flex gap-2 items-center">
         <PiTelevisionSimpleFill />
-        <span>Movie Magic</span>
+        <span>Movie Mania</span>
       </h1>
       <nav className="flex flex-col text-zinc-400 text-xl gap-3">
         <h1 className="text-white font-semibold text-2xl mt-10 mb-5">
