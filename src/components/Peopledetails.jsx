@@ -35,8 +35,6 @@ function MovieDetails() {
   //   return `${hours}h ${minutes}m`;
   // };
 
-  console.log(info);
-
   return info ? (
     <div className="w-full h-screen relative bg-[#201F31] text-white py-10 px-[5%]">
       {/* Part 1 navigation */}
