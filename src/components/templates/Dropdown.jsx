@@ -4,7 +4,7 @@ function Dropdown({ title, options, func }) {
   return (
     <div>
       <select
-        className="w-[8vw] py-1 px-2 bg-[#2B2B3C] ease-linear text-gray-400 active:text-white outline-none rounded-md"
+        className="w-[8vw] py-1 px-2 bg-[#2B2B3C] ease-linear text-gray-400 active:text-white outline-none rounded-md max-sm:w-[5vw]"
         name="option"
         onChange={func}
         id="option"

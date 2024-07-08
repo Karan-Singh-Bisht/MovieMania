@@ -15,10 +15,10 @@ function Header({ data }) {
       }}
       className="w-full h-[50%] flex flex-col justify-end items-start px-[5%] py-[4%]"
     >
-      <h1 className="w-[70%] text-5xl font-black text-white mb-2">
+      <h1 className="w-[70%] text-5xl font-black text-white mb-2 max-sm:text-4xl">
         {data.name || data.title || data.original_name || data.original_title}
       </h1>
-      <p className="w-[70%] normal-case text-white mb-2 text-balance">
+      <p className="w-[70%] normal-case text-white mb-2 text-balance max-sm:hidden">
         {data.overview.slice(0, 200)}...
         <Link
           to={`/${data.media_type}/details/${data.id}`}
@@ -27,7 +27,7 @@ function Header({ data }) {
           more
         </Link>
       </p>
-      <div className="flex gap-4">
+      <div className="flex gap-4 max-sm:hidden">
         <p className="text-white flex gap-2 items-center">
           <FaCalendarAlt />
           {data.release_date || data.first_air_date}

@@ -53,37 +53,37 @@ function Sidenav() {
 
   return (
     <div className="w-[20%] h-screen border-r-2 border-zinc-400 py-10 px-5">
-      <h1 className="font-bold text-white text-3xl flex gap-2 items-center">
+      <h1 className="font-bold text-white text-3xl flex gap-2 items-center max-sm:text-sm max-sm:justify-center">
         <PiTelevisionSimpleFill />
         <span>Movie Mania</span>
       </h1>
       <nav className="flex flex-col text-zinc-400 text-xl gap-3">
-        <h1 className="text-white font-semibold text-2xl mt-10 mb-5">
+        <h1 className="text-white font-semibold text-2xl mt-10 mb-5 max-sm:text-sm">
           New Feeds
         </h1>
         {features.map((feature, index) => (
           <Link
             key={index}
             to={feature.to}
-            className="flex gap-3 items-center hover:bg-[#6556CD] p-5 hover:text-white rounded-md duration-300"
+            className="flex gap-3 items-center hover:bg-[#6556CD] p-5 hover:text-white rounded-md duration-300 max-sm:text-sm max-sm:gap-0 max-sm:justify-center"
           >
             {feature.icon}
             {feature.name}
           </Link>
         ))}
       </nav>
-      <hr className="mb-5" />
-      <nav className="flex flex-col text-zinc-400 text-xl gap-3">
-        <h1 className="text-white font-semibold text-2xl mt-10 mb-5">
+      <hr className="mb-5 max-sm:mb-0" />
+      <nav className="flex flex-col text-zinc-400 text-xl gap-3 max-sm:items-center">
+        <h1 className="text-white font-semibold text-2xl mt-10 mb-5 max-sm:text-sm">
           Website
         </h1>
         {helps.map((help, index) => (
           <Link
             key={index}
             to={help.to}
-            className="flex gap-3 items-center hover:bg-[#6556CD] p-5 hover:text-white rounded-md duration-300"
+            className="flex gap-3 items-center hover:bg-[#6556CD] p-5 hover:text-white rounded-md duration-300 max-sm:text-sm"
           >
-            {help.icon}
+            <div className="max-sm:hidden">{help.icon}</div>
             {help.name}
           </Link>
         ))}

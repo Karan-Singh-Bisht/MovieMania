@@ -84,7 +84,7 @@ function MovieDetails() {
       <div className="w-full flex mt-[2vw] gap-2 p-5 flex-col">
         <div className="flex gap-5 w-full">
           <img
-            className="h-[45vh] w-[15vw] object-cover shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] rounded-t-md"
+            className="h-[45vh] w-[15vw] object-cover shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] rounded-t-md "
             src={`https://image.tmdb.org/t/p/original/${
               info[0].detail.poster_path || info[0].detail.backdrop_path
             }`}

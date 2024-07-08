@@ -24,7 +24,7 @@ function TopNav() {
   }, [query]);
 
   return (
-    <div className="w-full max-w-screen-xl ml-[20vw] h-[5%] relative p-4 flex items-center sticky-top gap-4">
+    <div className="w-full max-w-screen-xl ml-[20vw] h-[5%] relative p-4 flex items-center sticky-top gap-4 max-sm:ml-8 max-sm:mb-5">
       <label htmlFor="search">
         <IoSearch className="text-3xl ri-search-line hover:cursor-pointer text-white" />
       </label>

@@ -12,7 +12,7 @@ function TrendingCards({ data }) {
           <Link
             key={id}
             to={`/${item.media_type}/details/${item.id}`} // Example: Link to details page
-            className="trending-card"
+            className="trending-card max-sm:h-[50%]"
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(https://image.tmdb.org/t/p/original/${
                 item.backdrop_path || item.poster_path
@@ -20,14 +20,14 @@ function TrendingCards({ data }) {
             }}
           >
             <div className="trending-card-content">
-              <h2 className="trending-card-title">
+              <h2 className="trending-card-title max-sm:text-[2vw]">
                 {item.name || item.original_title}
               </h2>
-              <div className="trending-card-info">
+              <div className="trending-card-info max-sm:hidden">
                 <p className="media-type">{item.media_type}</p>
                 <p className="rating">{item.adult ? <NoImage /> : "PG"}</p>
               </div>
-              <p className="release-date">
+              <p className="release-date max-sm:hidden">
                 <FaCalendarAlt />
                 {item.release_date || item.first_air_date}
               </p>

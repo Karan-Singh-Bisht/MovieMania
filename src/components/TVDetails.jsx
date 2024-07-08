@@ -76,23 +76,25 @@ function TvDetails() {
 
       {/* part 2 poster and details */}
       <div className="w-full flex mt-[2vw] gap-2 p-5 flex-col">
-        <div className="flex gap-5 w-full">
+        <div className="flex gap-5 w-full ">
           <img
-            className="h-[45vh] w-[15vw] object-cover shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] rounded-t-md"
+            className="h-[45vh] w-[15vw] object-cover shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] rounded-t-md max-sm:w-20 max-sm:h-32 "
             src={`https://image.tmdb.org/t/p/original/${
               info[0].detail.poster_path || info[0].detail.backdrop_path
             }`}
             alt="image"
           />
           <div className="w-full flex flex-col gap-1">
-            <h1 className="text-6xl font-black text-white">
+            <h1 className="text-6xl font-black text-white max-sm:text-sm">
               {info[0].detail.name || original_name}
-              <small className="text-5xl font-semibold ml-1 text-gray-200">
+              <small className="text-5xl font-semibold ml-1 text-gray-200 max-sm:text-sm">
                 ({info[0].detail.first_air_date.slice(0, 4)})
               </small>
             </h1>
-            <div className="flex items-center gap-1 text-gray-400">
-              <span className="border text-sm p-1 border-gray-400">UA</span>
+            <div className="flex items-center gap-1 text-gray-400 max-sm:text-sm">
+              <span className="border text-sm p-1 border-gray-400 max-sm:text-sm">
+                UA
+              </span>
               <p className="text-white">{info[0].detail.release_date}</p>
               <div className="w-[0.3vw] h-[0.3vw] mx-1 rounded-full bg-white"></div>
               {info[0].detail.genres.map((item, index) => (
@@ -107,8 +109,8 @@ function TvDetails() {
                 </p>
               )}
             </div>
-            <div className="flex items-center gap-3 text-[1vw] my-2">
-              <div className="w-[4vw] h-[4vw] flex items-center text-black text-[1.5vw] font-black justify-center rounded-full bg-yellow-300">
+            <div className="flex items-center gap-3 text-[1vw] my-2 max-sm:opacity-0">
+              <div className="w-[4vw] h-[4vw] flex items-center text-black text-[1.5vw] font-black justify-center rounded-full bg-yellow-300 max-sm:text-md">
                 {(info[0].detail.vote_average * 10).toFixed() + "%"}
               </div>
               <h2 className="font-semibold">
@@ -116,13 +118,13 @@ function TvDetails() {
               </h2>
             </div>
             <div className="flex flex-col">
-              <h1 className="text-gray-200 text-[1vw] tracking-wide">
+              <h1 className="text-gray-200 text-[1vw] tracking-wide max-sm:text-[2vw]">
                 Number of Seasons :{" "}
                 <span className="font-black">
                   {info[0].detail.number_of_seasons}
                 </span>
               </h1>
-              <h1 className="text-gray-200 text-[1vw] tracking-wide">
+              <h1 className="text-gray-200 text-[1vw] tracking-wide max-sm:text-[2vw]">
                 Number of Episodes :{" "}
                 <span className="font-black">
                   {info[0].detail.number_of_episodes}
@@ -130,8 +132,12 @@ function TvDetails() {
               </h1>
             </div>
             <div className="w-[68%]">
-              <h1 className="text-2xl font-black mb-2">Overview</h1>
-              <p className="normal-case">{info[0].detail.overview}</p>
+              <h1 className="text-2xl font-black mb-2 max-sm:text-sm">
+                Overview
+              </h1>
+              <p className="normal-case max-sm:text-xs">
+                {info[0].detail.overview}
+              </p>
             </div>
             <p>
               <span className="normal-case font-semibold">
@@ -146,7 +152,7 @@ function TvDetails() {
             {info[0].videos && info[0].videos.key && (
               <Link
                 to={`${pathname}/trailer`}
-                className="p-3 bg-purple-400 hover:opacity-[0.8] mt-2 w-[10%] rounded-md text-white font-semibold"
+                className="p-3 bg-purple-400 hover:opacity-[0.8] mt-2 w-[10%] rounded-md text-white font-semibold max-sm:w-[65%]"
               >
                 Watch Trailer
               </Link>
@@ -160,7 +166,9 @@ function TvDetails() {
       <div className="w-full h-[17vw] p-5">
         <div className="flex flex-col ">
           {info[0].watchProvider && info[0].watchProvider.flatrate && (
-            <h1 className="font-bold text-2xl text-gray-200 mb-1">Watch On</h1>
+            <h1 className="font-bold text-2xl text-gray-200 mb-1 max-sm:text-3xl max-sm:p-0">
+              Watch On
+            </h1>
           )}
           <div className="flex gap-5 items-center">
             {info[0].watchProvider &&
@@ -171,7 +179,7 @@ function TvDetails() {
                   title={item.flatrate}
                   src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
                   alt="image"
-                  className="hover:cursor-pointer mb-2 rounded-md w-[3vw] h-[3vw]"
+                  className="hover:cursor-pointer mb-2 rounded-md w-[3vw] h-[3vw] max-sm:w-[5vw] max-sm:h-[5vw]"
                 />
               ))}
           </div>
@@ -188,7 +196,7 @@ function TvDetails() {
                 title={item.provider_name}
                 src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
                 alt="image"
-                className="hover:cursor-pointer rounded-md w-[3vw] h-[3vw]"
+                className="hover:cursor-pointer rounded-md w-[3vw] h-[3vw] max-sm:w-[5vw] max-sm:h-[5vw]"
               />
             ))}
         </div>
@@ -204,7 +212,7 @@ function TvDetails() {
                 title={item.provider_name}
                 src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
                 alt="image"
-                className="hover:cursor-pointer rounded-md w-[3vw] h-[3vw]"
+                className="hover:cursor-pointer rounded-md w-[3vw] h-[3vw] max-sm:w-[5vw] max-sm:h-[5vw]"
               />
             ))}
         </div>
